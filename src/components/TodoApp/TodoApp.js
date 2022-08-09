@@ -48,8 +48,8 @@ const TodoApp = () => {
                     Todo App
                 </div>
                 <div className="todoCreation">
-                    <input id="createTodoInput" type="text" placeholder="Type in something" onChange={e => {handleTodoCreation(e)}}></input>
-                    <button id="createTodoBtn" onClick={createTodo}>Add Task</button>
+                    <input id="createTodoInput"  className="todoInput create" type="text" placeholder="Type in something" onChange={e => {handleTodoCreation(e)}}></input>
+                    <button id="createTodoBtn" className="todoBtn create" onClick={createTodo}>Add Task</button>
                 </div>
                 </div>
                 <hr></hr>

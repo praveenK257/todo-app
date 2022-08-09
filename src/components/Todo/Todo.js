@@ -12,10 +12,12 @@ const Todo = ({todo, deleteTodo}) => {
 
     return (
         <div className="todo">
-            <span className="todoTitle">{title}</span>
-            <button className="deleteBtn" onClick={deleteTodoFromParent}> DELETE </button>
-            <button className="editBtn"> EDIT </button>
-            <button className="statusBtn"> Status </button>
+            <div className="todoTitle">{title}</div>
+            <div className="todoActions">
+                <button className="todoBtn delete" onClick={deleteTodoFromParent}> Delete </button>
+                <button className="todoBtn edit"> Edit </button>
+                <button className="todoBtn status"> Status </button>
+            </div>
         </div>
     )
 }
