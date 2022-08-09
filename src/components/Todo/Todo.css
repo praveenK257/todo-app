@@ -23,24 +23,16 @@
     height: 34px;
 }
 
-.todoBtn.delete{
-    background-color: var(--red);
+.todoBtn.withIcon{
+    background-color: transparent;
     color: var(--white);
+    transform: scale(1.1);
+    margin-bottom: 15px;
 }
 
-.todoBtn.delete:hover{
-    background-color: var(--delete-button-hover);
-    transition: background-color 0.2s ease;
-}
-
-.todoBtn.edit{
-    background-color: var(--black);
-    color: var(--white);
-}
-
-.todoBtn.edit:hover{
-    background-color: var(--edit-button-hover);
-    transition: background-color 0.2s ease;
+.todoBtn.withIcon:hover{
+    filter: invert(.2) brightness(0.8);
+    transition: filter .1s linear;
 }
 
 .todoBtn.status{

@@ -26,6 +26,11 @@
     border-style: hidden;
 }
 
+.todoBtnIcon{
+    height: 25px;
+    width: auto;
+}
+
 .emptyMessage{
     font-size: 20px;
 }

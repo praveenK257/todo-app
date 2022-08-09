@@ -41,6 +41,27 @@
     transition: background-color 0.2s ease;
 }
 
+
+.todoBtn.delete{
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.todoBtn.delete:hover{
+    background-color: var(--delete-button-hover);
+    transition: background-color 0.2s ease;
+}
+
+.todoBtn.edit{
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.todoBtn.edit:hover{
+    background-color: var(--edit-button-hover);
+    transition: background-color 0.2s ease;
+}
+
 .todosContainer{
     display: flex;
     justify-content: center;
