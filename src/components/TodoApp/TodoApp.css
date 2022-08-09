@@ -1,3 +1,11 @@
+.appContainer {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 30px;
+}
+
 .todoAppHeader{
     margin: 50px 0;
     display: flex;
@@ -7,10 +15,10 @@
 }
 
 .todoAppTitle{
-    color: blue;
+    color: var(--blue);
     font-weight: bold;
     font-size: 30px;
-    padding: 10px;
+    padding: 9px;
 }
 
 .todoCreation{
@@ -20,17 +28,46 @@
 
 #createTodoInput{
     margin: 10px;
+    padding: 10px;
+    width: 50vw;
+    font-size: 15px;
 }
 
 #createTodoBtn{
-
+    margin: auto;
+    padding: 10px;
+    height: 40px;
+    width: 90px;
 }
 
 .emptyMessage{
-
+    font-size: 20px;
 }
 
 .todosContainer{
-
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    overflow: auto;
+    height: calc(71vh - 10px );
+    scroll-behavior: smooth;
 }
 
+.todos{
+    
+}
+
+@media (min-width:481px)  { 
+    .App{
+        width: calc(93vw - 10px);
+        height: calc(99vh - 10px);
+        margin-left: 2.5vw;
+    }
+}
+@media (min-width:961px) {
+    .App{
+        width: calc(90vw - 10px);
+        height: calc(99vh - 10px);
+        margin-left: 5vw;
+    }
+}

@@ -20,9 +20,13 @@ const TodoApp = () => {
                 status: 0 // 0-NotComplete, 1-Complete
             }
             setTodos([...todos, todo])
+            setNewTodo("")
             const textBox = document.getElementById('createTodoInput')
             textBox.value=""
             textBox.focus()
+        }
+        else{
+            // Show error
         }
     }
 
@@ -38,28 +42,30 @@ const TodoApp = () => {
 
     return (
         <>
-            <div className="todoAppHeader">
-            <div className="todoAppTitle">
-                Todo App
-            </div>
-            <div className="todoCreation">
-                <input id="createTodoInput" type="text" placeholder="Type in something" onChange={e => {handleTodoCreation(e)}}></input>
-                <button id="createTodoBtn" onClick={createTodo}>Add Task</button>
-            </div>
-            </div>
-            <hr></hr>
-            <div className="todosContainer">
-                { (todos.length === 0) ?
-                    <div className="emptyMessage">No tasks found :)</div> :
+            <div className="appContainer">
+                <div className="todoAppHeader">
+                <div className="todoAppTitle">
+                    Todo App
+                </div>
+                <div className="todoCreation">
+                    <input id="createTodoInput" type="text" placeholder="Type in something" onChange={e => {handleTodoCreation(e)}}></input>
+                    <button id="createTodoBtn" onClick={createTodo}>Add Task</button>
+                </div>
+                </div>
+                <hr></hr>
+                <div className="todosContainer">
+                    { (todos.length === 0) ?
+                        <div className="emptyMessage">No tasks found :)</div> :
 
-                    <div>
-                        {
-                            todos.map((todo, index)=>
-                                <Todo key={index} todo={todo} deleteTodo={deleteTodo}/>
-                            ) 
-                        }                           
-                    </div>
-                }
+                        <div className="todos">
+                            {
+                                todos.map((todo, index)=>
+                                    <Todo key={index} todo={todo} deleteTodo={deleteTodo}/>
+                                ) 
+                            }                           
+                        </div>
+                    }
+                </div>
             </div>
         </>
     )

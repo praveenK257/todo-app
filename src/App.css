@@ -1,9 +1,22 @@
+:root{
+    --white: #ffffff;
+    --grey: #dedede;
+    --blue: #0a4fa4;
+    --black: #020812;
+    --yellow: #fdd425;
+}
+
 body{
     height: 100%;
     width: 100%;
+    background-image: linear-gradient(to right, #141e30, #243b55);
+    overflow: hidden;
 }
+
 .App{
     margin-top: 0;
-    width: 100%;
     font-size: 15px;
+    width: calc(90vw - 10px);
+    height: calc(99vh - 10px);
+    margin-left: 5vw;
 }
