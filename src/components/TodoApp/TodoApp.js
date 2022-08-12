@@ -7,7 +7,8 @@ const TodoApp = () => {
 
     const [newTodo, setNewTodo] = useState("")
     const [todos, setTodos] = useState( [] )
-    
+    const [modalProps, setModalProps] = useState({})
+
     const handleTodoCreation = (e)=>{
         setNewTodo(e.target.value)
     }
@@ -35,9 +36,9 @@ const TodoApp = () => {
         setTodos( newTodos )
     }
 
-    const editTodo = (updatedTodo)=>{
-        let thisTodo = todos.filter(todo=> updatedTodo.id === todo.id)
-        thisTodo.title = updatedTodo.title
+    const showEditModal = (modalProps)=>{
+        setModalProps(modalProps)
+        document.getElementById('editModal').classList.toggle('show')
     }
 
     return (
@@ -60,11 +61,24 @@ const TodoApp = () => {
                         <div className="todos">
                             {
                                 todos.map((todo, index)=>
-                                    <Todo key={index} todo={todo} deleteTodo={deleteTodo}/>
+                                    <Todo key={index} todo={todo} deleteTodo={deleteTodo} showEditModal={showEditModal}/>
                                 ) 
                             }                           
                         </div>
                     }
+                </div>
+            </div>
+            {/* Modal  */}
+            <div id="editModal" className="modal">
+                <div className="modalHeader">
+                    {modalProps.heading}
+                </div>
+                <div className="modalContent">
+                    {modalProps.primaryMessage}
+                </div>
+                <div className="modalFooter">
+                    <button className="todoBtn" onClick={modalProps.accept}>Save</button>
+                    <button className="todoBtn" onClick={modalProps.reject}>Cancel</button>
                 </div>
             </div>
         </>

@@ -7,11 +7,20 @@
 }
 
 .todoTitle{
-    inline-size: 50vw;
+    text-align: center;
+    margin-left: 10%;
+    inline-size: 40vw;
+    min-width: 40vw;
     overflow-wrap: break-word;
 }
 
+.todoTitle.complete{
+    color: var(--green);
+    text-decoration: line-through black solid 1px;
+}
+
 .todoActions{
+    margin-right: 20%;
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
@@ -36,11 +45,22 @@
 }
 
 .todoBtn.status{
-    background-color: var(--green);
+    width: fit-content;
+    background-color: var(--yellow);
     color: var(--white);
 } 
 
 .todoBtn.status:hover{
     background-color: var(--status-button-hover);
+    transition: background-color 0.2s ease;
+}
+
+.todoBtn.status.complete{
+    background-color: var(--green);
+    color: var(--white);
+} 
+
+.todoBtn.status.complete:hover{
+    background-color: var(--status-complete-button-hover);
     transition: background-color 0.2s ease;
 }

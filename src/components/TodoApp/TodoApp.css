@@ -5,6 +5,7 @@
     border: 2px solid var(--white);
     border-radius: 30px;
     box-shadow: white 0px 2px 8px 0px;
+    overflow: hidden;
 }
 
 .todoAppHeader{
@@ -72,15 +73,31 @@
 }
 
 .todos{
-    width: 90%;
     font-size: 20px;
 }
 
-@media (min-width:481px)  { 
+@media (min-width:320px)  { 
     .App{
         width: calc(93vw - 10px);
         height: calc(99vh - 10px);
         margin-left: 2.5vw;
+    }
+    .todos{
+        width: 100%;
+    }
+    .todosContainer::-webkit-scrollbar{
+        height: 8px;
+        width: 3px;
+    }
+    
+    .todosContainer::-webkit-scrollbar-thumb{
+        -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+        border-radius: 10px;
+    }
+    
+    .todosContainer::-webkit-scrollbar-track{
+        -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+        border-radius: 43px;
     }
 }
 @media (min-width:961px) {
@@ -89,4 +106,44 @@
         height: calc(99vh - 10px);
         margin-left: 5vw;
     }
+    .todos{
+        width: 90%;
+    }
+    .todosContainer::-webkit-scrollbar{
+        height: auto;
+        width: 10px;
+    }
+    .todosContainer::-webkit-scrollbar-thumb{
+        -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+        border-radius: 10px;
+    }
+    
+    .todosContainer::-webkit-scrollbar-track{
+        -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+        border-radius: 43px;
+    }
+}
+
+.modal{
+    display: none;
+    position: absolute;
+    width: fit-content;
+    background-color: red;
+    top: 35%;
+}
+
+.modal.show{
+    display: block;
+}
+
+.modalHeader{
+
+}
+
+.modalContent{
+
+}
+
+.modalFooter{
+
 }
