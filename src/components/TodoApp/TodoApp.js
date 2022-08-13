@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Todo from '../Todo/Todo'
 import './TodoApp.css'
@@ -6,7 +6,7 @@ import './TodoApp.css'
 const TodoApp = () => {
 
     const [newTodo, setNewTodo] = useState("")
-    const [todos, setTodos] = useState( [] )
+    const [todos, setTodos] = useState( JSON.parse(localStorage.getItem('savedTodos')) || [] )
     const [modalProps, setModalProps] = useState({})
 
     const handleTodoCreation = (e)=>{
@@ -32,14 +32,32 @@ const TodoApp = () => {
     }
 
     const deleteTodo = (id)=>{
-        let newTodos = todos.filter(todo=> todo.id !== id)
+        let newTodos = todos.filter( (todo) => todo.id !== id )
         setTodos( newTodos )
+        console.log(newTodos)
     }
 
     const showEditModal = (modalProps)=>{
         setModalProps(modalProps)
         document.getElementById('editModal').classList.toggle('show')
     }
+
+    // save in localstorage
+    const saveTodosState = (todo = undefined)=>{
+        if(todo){
+            todos.forEach((item, ind) => {
+                if(item.id === todo.id ){
+                    todos[ind] = todo
+                    console.log(todo)
+                }
+            })   
+        }
+        localStorage.setItem('savedTodos', JSON.stringify(todos))
+    }
+
+    useEffect(()=>{
+        saveTodosState()
+    },[todos])
 
     return (
         <>
@@ -61,7 +79,7 @@ const TodoApp = () => {
                         <div className="todos">
                             {
                                 todos.map((todo, index)=>
-                                    <Todo key={index} todo={todo} deleteTodo={deleteTodo} showEditModal={showEditModal}/>
+                                    <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} showEditModal={showEditModal} saveTodosState={saveTodosState}/>
                                 ) 
                             }                           
                         </div>
@@ -74,7 +92,7 @@ const TodoApp = () => {
                     {modalProps.heading}
                 </div>
                 <div className="modalContent">
-                    {modalProps.primaryMessage}
+                    <input id="editModalTextbox" type="text" value={modalProps.primaryMessage} placeholder="Enter new title"></input>
                 </div>
                 <div className="modalFooter">
                     <button className="todoBtn" onClick={modalProps.accept}>Save</button>
