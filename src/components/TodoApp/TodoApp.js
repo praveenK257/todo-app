@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 
 import Todo from '../Todo/Todo'
 import './TodoApp.css'
+import Modal from '../Modal/Modal'
 
 const TodoApp = () => {
 
     const [newTodo, setNewTodo] = useState("")
     const [todos, setTodos] = useState( JSON.parse(localStorage.getItem('savedTodos')) || [] )
     const [modalProps, setModalProps] = useState({})
-
+    const [updateTitleInChild, setTitleInChild] = useState()
+    
     const handleTodoCreation = (e)=>{
         setNewTodo(e.target.value)
     }
@@ -34,11 +36,11 @@ const TodoApp = () => {
     const deleteTodo = (id)=>{
         let newTodos = todos.filter( (todo) => todo.id !== id )
         setTodos( newTodos )
-        console.log(newTodos)
     }
 
-    const showEditModal = (modalProps)=>{
+    const showEditModal = (modalProps, childUpdate)=>{
         setModalProps(modalProps)
+        setTitleInChild(childUpdate)
         document.getElementById('editModal').classList.toggle('show')
     }
 
@@ -48,14 +50,26 @@ const TodoApp = () => {
             todos.forEach((item, ind) => {
                 if(item.id === todo.id ){
                     todos[ind] = todo
-                    console.log(todo)
                 }
             })   
         }
         localStorage.setItem('savedTodos', JSON.stringify(todos))
     }
 
+    const changeTodoTitle = (e, id)=>{
+        todos.forEach((todo, ind)=>{
+            if(todo.id === id){
+                let updTodo = todo
+                updTodo.title = document.getElementById('editModalTextbox').value
+                todos[ind] = updTodo
+            }
+        })
+        setTodos(todos)
+        localStorage.setItem('savedTodos', JSON.stringify(todos))
+    }
+
     useEffect(()=>{
+        console.log('triggered')
         saveTodosState()
     },[todos])
 
@@ -79,26 +93,14 @@ const TodoApp = () => {
                         <div className="todos">
                             {
                                 todos.map((todo, index)=>
-                                    <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} showEditModal={showEditModal} saveTodosState={saveTodosState}/>
+                                    <Todo key={todo.id} todo={todo} deleteTodo={deleteTodo} showEditModal={showEditModal} saveTodosState={saveTodosState} changeTodoTitle={changeTodoTitle}/>
                                 ) 
                             }                           
                         </div>
                     }
                 </div>
             </div>
-            {/* Modal  */}
-            <div id="editModal" className="modal">
-                <div className="modalHeader">
-                    {modalProps.heading}
-                </div>
-                <div className="modalContent">
-                    <input id="editModalTextbox" type="text" value={modalProps.primaryMessage} placeholder="Enter new title"></input>
-                </div>
-                <div className="modalFooter">
-                    <button className="todoBtn" onClick={modalProps.accept}>Save</button>
-                    <button className="todoBtn" onClick={modalProps.reject}>Cancel</button>
-                </div>
-            </div>
+            <Modal modalProps={modalProps} changeTodoTitle={changeTodoTitle}/>
         </>
     )
 }

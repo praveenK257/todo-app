@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import './Todo.css'
 import deleteIcon from '../../images/deleteIcon.png'
 import editIcon from '../../images/editIcon.png'
 
-const Todo = ({todo, deleteTodo, showEditModal, saveTodosState}) => {
+const Todo = ({todo, deleteTodo, showEditModal, saveTodosState, changeTodoTitle}) => {
     
     const [title, setTitle] = useState(todo.title)
     
@@ -14,23 +14,28 @@ const Todo = ({todo, deleteTodo, showEditModal, saveTodosState}) => {
         deleteTodo(todo.id)
     }
 
-    // const editTodoTitle = (e)=>{
-    //     // Open modal to edit & save
-    //     let target = e.target.offsetParent
+    const editTodoTitle = (e)=>{
+        if(!e){
+            return
+        }
+        let target = e.target.offsetParent
         
-    // }
+    }
 
     const openEditModal = (e)=>{
         showEditModal({
-            target: Todo, heading: 'Edit Todo', primaryMessage: title, 
-            accept: (e)=>{
-                Todo.setTitle("edited")
-                document.getElementById('editModal').classList.toggle('show')
-            } ,
-            reject: (e)=>{
-                document.getElementById('editModal').classList.toggle('show')
-            }
-        })
+            target: Todo, heading: todo.title, primaryMessage: title,
+            todoId: todo.id, 
+            // accept: (e)=>{
+            //     changeTodoTitle(e, todo.id)
+            //     editTodoTitle()
+            //     document.getElementById('editModal').classList.add('show')
+            // } 
+            // ,
+            // reject: (e)=>{
+            //     document.getElementById('editModal').classList.remove('show')
+            // }
+        }, editTodoTitle)
     }
 
     const editTodoStatus = (e)=>{
@@ -42,6 +47,10 @@ const Todo = ({todo, deleteTodo, showEditModal, saveTodosState}) => {
         // target.parentElement.previousElementSibling.classList.toggle('complete')
         saveTodosState(todo)
     }
+
+    useEffect(()=>{
+      console.log('triggered')  
+    },[todo])
 
     return (
         <div className="todo">
